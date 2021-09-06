@@ -1,6 +1,6 @@
 # 01-基本输出
 
-`01-hello/hello.js`
+[`01-hello/hello.js`](https://github.com/flomesh-io/pipy/blob/main/tutorial/01-hello/hello.js)
 
 ```js
 pipy()
