@@ -117,8 +117,6 @@ $ bin/pipy --gui-port=6060 /tmp/pipy.js
 
 脚本编辑器上方的工具栏中从左到右依次为：增加脚本、删除脚本、保存、启动、停止、重载、打开/关闭日志面板。
 
-![edited](https://github.com/addozhang/pipy-guide/tree/d85f8a0dbbe8e85aab08420a37159f8167017df9/tutor_zh/media/edited.png)
-
 修改响应内容后，可以看到工具栏的保存按钮高亮了，这里需要点击进行保存。
 
 ```text

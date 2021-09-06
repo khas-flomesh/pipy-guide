@@ -1,8 +1,7 @@
 # Table of contents
 
-* [Pipy Guide](README.md)
 
-## 基础教程 <a id="tutor_zh"></a>
+## 基础教程
 
 * [0x00-启动与web控制台的使用](tutor_zh/00-console_zh.md)
 * [0x01-基本输出](tutor_zh/01-hello_zh.md)
