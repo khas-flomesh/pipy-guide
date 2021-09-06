@@ -1,8 +1,8 @@
-# 01-基本输出
+# 0x01-基本输出
 
 [`01-hello/hello.js`](https://github.com/flomesh-io/pipy/blob/main/tutorial/01-hello/hello.js)
 
-```js
+```javascript
 pipy()
 
 .listen(8080) // pipeline0
@@ -36,7 +36,7 @@ pipy()
 
 整个处理流程是先对请求负载进行解码，再调用处理函数，最后将函数处理结果编码。
 
-```
+```text
    ┌───────────────┐
    │               │
    │   Decoding    │
@@ -64,7 +64,7 @@ pipy()
 
 `Message` 被发送到目标 pipeline 的 sesison 上进行处理，在创建新的 session 时会将当前上下文“复制”到新的 session 中。每个 `Message` 在目标 pipeline 上有自己独立的一套全局变量，以及每个 filter 的独立状态。
 
-```
+```text
   ┌──────────────┐
   │              │
   │   Decoding   │
@@ -94,7 +94,7 @@ pipy()
 
 这里的“复制”，与传值和传指针一样的行为。比如下面的配置，在不论在当前 pipeline 中对全局变量做修改，`demuxHTTP` 的目标 pipeline 拿到的 `_strVal` 都是个空字符串；而 `_objVal` 则会拿到当前值。
 
-```js
+```javascript
 pipy({
     _strVal: "",
     _objVal: {}
@@ -113,10 +113,11 @@ pipeline3 是 pipeline1 和 pipeline2 的目标 pipeline，即 pipeline1 和 pip
 
 可以理解成 `demuxHTTP` 将当前的上下文复制到了 pipeline3 中。
 
-```shell
+```text
 $ curl localhost:8081
 Hi, I'm on port 8081!
 
 $ curl localhost:8082
 Hi, I'm on port 8082!
 ```
+

@@ -10,5 +10,5 @@
 
 ## 使用场景示例
 
-* [使用场景示例](shi-yong-chang-jing-shi-li/scenarios_zh.md)
+* [使用场景示例](shi-yong-chang-jing-shi-li/shi-yong-chang-jing-shi-li.md)
 

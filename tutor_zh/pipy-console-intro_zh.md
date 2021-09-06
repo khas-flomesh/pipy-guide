@@ -1,4 +1,4 @@
-# 000-启动与web控制台的使用
+# 0x00-启动与web控制台的使用
 
 [Pipy](https://github.com/flomesh-io/pipy) 是一个轻量级、高性能、高稳定、可编程的网络代理。可编程则是 Pipy 的灵魂 -- 可以通过编程的方式制定流量的处理规则，而规则是客户化价值的载体。
 
@@ -101,7 +101,7 @@ $ bin/pipy --gui-port=6060 /tmp/pipy.js
 
 命令输出中说明了 GUI 监听在 `6060` 端口。
 
-![](media/console.png)
+![](../.gitbook/assets/console.png)
 
 从左到右依次为：导航栏、当前生效的模块及 Pipeline、选中的 Pipeline 的结构、日志。
 
@@ -109,16 +109,15 @@ $ bin/pipy --gui-port=6060 /tmp/pipy.js
 
 选中一个 Pipeline，第三栏中会展示出该 Pipeline 所使用的过滤器。
 
-![](media/pipeline-filters.png)
+![](../.gitbook/assets/pipeline-filters.png)
 
 前面我们提出了问题：如何快速的修改脚本并调试。打开脚本编辑器，选中我们的脚本文件：
 
-![](media/pipeline-editor.png)
+![](../.gitbook/assets/pipeline-editor.png)
 
 脚本编辑器上方的工具栏中从左到右依次为：增加脚本、删除脚本、保存、启动、停止、重载、打开/关闭日志面板。
 
-![edited](media/edited.png)
-
+![edited](https://github.com/addozhang/pipy-guide/tree/d85f8a0dbbe8e85aab08420a37159f8167017df9/tutor_zh/media/edited.png)
 
 修改响应内容后，可以看到工具栏的保存按钮高亮了，这里需要点击进行保存。
 
@@ -133,3 +132,4 @@ Hello!
 $ curl http://127.0.0.1:6080
 Hello World!
 ```
+
