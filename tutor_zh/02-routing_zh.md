@@ -2,6 +2,8 @@
 
 流量管理中，对请求的路由是比较常见的操作。下面的这段脚本，演示了如何使用 pipy js 的脚本实现路由功能。
 
+这里我们会用到[上一篇](01-hello_zh.md)中的脚本作为上游服务。
+
 [`02-routing/proxy.js`](https://github.com/flomesh-io/pipy/blob/main/tutorial/02-routing/proxy.js)
 
 ```javascript

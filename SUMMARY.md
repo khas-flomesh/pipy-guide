@@ -7,6 +7,8 @@
 * [0x01-基本输出](tutor_zh/01-hello_zh.md)
 * [0x02-路由](tutor_zh/02-routing_zh.md)
 * [0x03-连接池](tutor_zh/03-connection-pool_zh.md)
+* [0x04-负载均衡](tutor_zh/04-load-balancing_zh.md)
+* [0x05-请求日志](tutor_zh/05-logging_zh.md)
 
 ## 使用场景示例
 
