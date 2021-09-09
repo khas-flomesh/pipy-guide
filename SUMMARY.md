@@ -9,6 +9,8 @@
 * [0x03-连接池](tutor_zh/03-connection-pool_zh.md)
 * [0x04-负载均衡](tutor_zh/04-load-balancing_zh.md)
 * [0x05-请求日志](tutor_zh/05-logging_zh.md)
+* [0x06-路径重写](tutor_zh/06-path-rewriting_zh.md)
+* [0x07-JWT](tutor_zh/07-jwt_zh.md)
 
 ## 使用场景示例
 
