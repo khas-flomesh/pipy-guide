@@ -64,7 +64,8 @@ Options:
   --log-level=<debug|info|warn|error>  Set the level of log output
   --verify                             Verify configuration only
   --reuse-port                         Enable kernel load balancing for all listening ports
-  --gui-port=<port>                    Enable web GUI on the specified port
+  --dev-port=<port>                    Enable development service on the specified port
+  --repo-port=<port>                   Enable repository service on the specified port
 ```
 
 前面的示例中，我们在 `pipy.js` 文件中键入了几行代码（具体代码在后续教程中进行说明）实现了简单的请求/响应。假如要修改响应的内容要怎么办？比如返回 “Hello World!”
@@ -77,12 +78,12 @@ Options:
 
 ## Pipy Console
 
-Pipy Console 的开启很简单，前面查看 Pipy 的帮助信息时有看到 `--gui-port=<port> Enable web GUI on the specified port`。
+Pipy Console 的开启很简单，前面查看 Pipy 的帮助信息时有看到 `--dev-port=<port> Enable web GUI on the specified port`。
 
-我们调整下前面的命令，加上 `--gui-port=6060` 选项：
+我们调整下前面的命令，加上 `--dev-port=6060` 选项：
 
 ```text
-$ bin/pipy --gui-port=6060 /tmp/pipy.js
+$ bin/pipy --dev-port=6060 /tmp/pipy.js
 2021-09-04 17:16:16 [info] [config]
 2021-09-04 17:16:16 [info] [config] Module /pipy.js
 2021-09-04 17:16:16 [info] [config] ===============
