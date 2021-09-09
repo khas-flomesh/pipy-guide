@@ -307,23 +307,44 @@ pipy()
 
 `pack` 过滤器输出的是 `Data` 类型的数据，与请求/响应的消息体一致。发送到上游的时所需的消息还缺少消息头，因此使用了 `replaceMessageStart` 写入一个 `MessageStart` 对象携带消息头。
 
+## 测试
+
+```js
+{
+  "req": {
+    "protocol": "HTTP/1.1",
+    "headers": {
+      "host": "localhost:8000",
+      "user-agent": "HTTPie/2.4.0",
+      "accept-encoding": "gzip, deflate",
+      "accept": "*/*",
+      "connection": "keep-alive"
+    },
+    "method": "GET",
+    "path": "/hi",
+    "body": ""
+  },
+  "res": {
+    "protocol": "HTTP/1.1",
+    "headers": {
+      "connection": "keep-alive"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "body": "Hi, I'm on port 8081!\n"
+  },
+  "target": "127.0.0.1:8081",
+  "reqTime": 1631152062810,
+  "resTime": 1631152062810,
+  "endTime": 1631152062810,
+  "remoteAddr": "127.0.0.1",
+  "remotePort": 51574,
+  "localAddr": "127.0.0.1",
+  "localPort": 8000
+}
+```
+
 ## 思考
 
-这次的脚本使用了多个新的过滤器，这些过滤器跨越了不同的 pipeline，对 session 和 上下文有了不同的操作。
-
-> 新 session：创建新的 session，在新的 session 中执行目标 pipeline。
-> 
-> 新上下文：基于现有上下文创建新的上下文。影响全局变量，“值传递”类型的变量使用当前值；“传指针”类型的变量，访问同一个对象。
-> 
-> 对原 pipeline 透明：不影响原 pipelne 的数据流。
-
-| 过滤器   | 新 session | 新上下文 | 对原 pipeline 透明 |
-|-------|-----------|------|----------------|
-| fork  | √         | x    | √              |
-| merge | x         | x    | √              |
-| link  | √         | √    | x              |
-| use   | √         | √    | x              |
-| mux   | √         | √    | x              |
-| Demux | √         | √    | x              |
-
+这次的脚本使用了多个新的过滤器，这些过滤器跨越了不同的 pipeline，对 session 和上下文有了不同的操作。
 
