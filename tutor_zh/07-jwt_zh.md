@@ -324,7 +324,7 @@ Pipy 内置提供了 `crypto.JWT` 用于实现 JWT 校验。
 
 在 pipeline `jwt` 中则是使用 `crypto.JWT` 进行 `Base64URL` 解码、验签等操作。
 
-任何一个检查不通过，则将认证结果 `_turnDown` 设置为 `true`。
+任何一个检查不通过，则将认证结果 `_turnDown` 设置为 `true`，并返回一个包含错误信息的 `Message`；通过则放行原请求，返回原来的 `Message`。
 
 ```js
 .pipeline('jwt')
@@ -385,3 +385,9 @@ HTTP/1.1 200 OK
 content-length: 0
 connection: keep-alive
 ```
+
+## 思考
+
+做到了这一步，看下代码已经到了 200 多行。并且从设计的角度来看，将路由、认证的功能耦合在一处不够优雅，且维护困难。
+
+Pipy 的模块特性，可以解决这个问题。

@@ -11,6 +11,10 @@
 * [0x05-请求日志](tutor_zh/05-logging_zh.md)
 * [0x06-路径重写](tutor_zh/06-path-rewriting_zh.md)
 * [0x07-JWT](tutor_zh/07-jwt_zh.md)
+* [0x08 模块](tutor_zh/08-plugins_zh.md)
+* [0x09 配置与逻辑分离](tutor_zh/09-configuration_zh.md)
+* [0x10 黑白名单](tutor_zh/10-ban_zh.md)
+* [0x11 黑白名单](tutor_zh/11-throttle_zh.md)
 
 ## 使用场景示例
 
