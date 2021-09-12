@@ -81,11 +81,9 @@ pipy({
 ```
 
 - `quota`：可以是整数、字符串或者函数。如果是整数，比如 `10000`，则表示请求数限制 10000/s；如果是字符串，比如 `100k`，则表示请求数量限制 100k/s；如果是函数，<u>每隔 5s 调用一次该函数更新</u>，使用函数的结果作为统计值。
-- `account` ：可以是字符串或者函数，表示流控的统计维度。如果没有指定，则会使用 `Session` 的account，即整个 Session 作为统计维度。
+- `account` ：可以是字符串或者函数，表示流控的统计维度。
 
-这里重点说一下 `account`，可能会有点复杂。在 `tap` 过滤器中有一个 `AccountManager` 用于维护多个 `Account`（参数 `account` 是函数时，会产生动态的 `Account`）。`Account` 都有名字，这个名字，就是 `account` 指定的字符串本身或者函数的计算结果。假如未指定，`AccountManager` 则会创建一个无名的 `Account`，即使 Session 的 `Account`。
-
-一个 `Pipeline`，可以有多个 `Session`。`Session` 的数量，决定了并发的能力。
+这里重点说一下 `account`，可能会有点复杂。在 `tap` 过滤器中有一个 `AccountManager` 用于维护多个 `Account`（参数 `account` 是函数时，会产生动态的 `Account`）。`Account` 都有名字，这个名字，就是 `account` 指定的字符串本身或者函数的计算结果。
 
 看下测试。
 
@@ -128,36 +126,21 @@ Transfer/sec:      63.95B
 吞吐量为 5，符合预期
 
 ```shell
-$ wrk -t5 -c5 -d 5s http://localhost:8000
-
-$ wrk -t5 -c5 -d 3s http://localhost:8000
-
-```
-
-### 吞吐量为 1；连接、并发数为5；不设置 `account`
-
-还是使用上面的配置，但是这次改动下代码。注释掉 `throttle.js` 中的 `tap` 过滤器的 `account` 参数。
-
-```js
-.pipeline('throttle')
-  .tap(
-    () => _rateLimit,
-    //() => __serviceID,
-  )
-```
-
-吞吐量最高为 5，符合预期。5 个连接，`Session` 最多为 5。每个 `Session` 的吞吐为 1。
-
-```shell
-$ wrk -t5 -c5 -d 5s http://localhost:8000
-
-$ wrk -t5 -c5 -d 3s http://localhost:8000
-
+$ wrk -t5 -c5 -d 30s http://localhost:8000
+Running 30s test @ http://localhost:8000
+  5 threads and 5 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   908.79ms  932.31ms   1.86s    66.67%
+    Req/Sec     0.32      1.62     9.00     96.77%
+  31 requests in 30.03s, 1.88KB read
+  Socket errors: connect 0, read 0, write 0, timeout 28
+Requests/sec:      1.03
+Transfer/sec:      64.01B
 ```
 
 ## 思考
 
 至此我们模拟了几种服务治理的场景，这些都是基于对数据的控制。那数据本体是否有操作的价值？
 
-有的，比如有两个异构的系统，分别是提供 SOAP 和 JSON 的网络服务。需要根据不同的路由，讲统一客户端的请求路由的不同的系统。也就是新旧系统共存，旧系统还无法完全下线。
+有的，比如有两个异构的系统，分别是提供 SOAP 和 JSON 的网络服务。需要根据不同的路由，讲统一客户端的请求路由的不同的系统，也就是新旧系统共存，旧系统还无法完全下线；或者新旧两个系统的交互。
 
