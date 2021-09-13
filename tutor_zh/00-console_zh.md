@@ -50,24 +50,7 @@ $ docker run --rm --entrypoint 'pipy' flomesh/pipy-pjs:latest --help
 也可以在 Kubernetes 上中运行：
 
 ```shell
-$ cat > pod.yaml <<EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  creationTimestamp: null
-  labels:
-    run: pipy
-  name: pipy
-spec:
-  containers:
-  - image: flomesh/pipy-pjs:latest
-    name: pipy
-    command: ["pipy", "--help"]
-  dnsPolicy: ClusterFirst
-  restartPolicy: Never
-EOF
-
-$ kubectl apply -f pod.yaml
+$ kubectl run pipy --image flomesh/pipy-pjs:latest --restart='Never' --image-pull-policy='IfNotPresent' -- pipy --help
 $ kubectl logs pod
 ```
 
