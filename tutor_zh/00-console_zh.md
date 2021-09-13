@@ -2,21 +2,78 @@
 
 [Pipy](https://github.com/flomesh-io/pipy) 是一个轻量级、高性能、高稳定、可编程的网络代理。可编程带来的灵活性和扩展性是 Pipy 的优势 -- 通过编程的方式定制流量的处理规则，可以满足业务日益告诉增长和频繁变动的需求。
 
-JavaScript作为目前市场上使用群体最大的编程语言，其语义简单直接，适合编写灵活且高度定制化的规则。内置的JavaScript引擎可以高效的、解释性的执行这些规则，满足规则定制、调试的开发需求同时，充分满足网络流量处理的高性能、高可靠需求。
+JavaScript 作为目前市场上使用群体最大的编程语言，其语义简单直接，适合编写灵活且高度定制化的规则。内置的 JavaScript 引擎可以高效的、解释性的执行这些规则，满足规则定制、调试的开发需求同时，充分满足网络流量处理的高性能、高可靠需求。
 
-规则是灵活且多变的，这要求充分满足规则开发者的需求--便利、简介、易学、易用，因此一款便捷的规则开发工具是必要的。Pipy内置的pipy dev console (pipy开发控制台)以 web 的方式为规则开发人员提供了浏览器可以直接访问的集成开发环境（IDE）。
+规则是灵活且多变的，这要求充分满足规则开发者的需求 -- 便利、简介、易学、易用，因此一款便捷的规则开发工具是必要的。Pipy 内置的 Pipy dev console (Pipy 开发控制台) 以 Web 的方式为规则开发人员提供了浏览器可以直接访问的集成开发环境（IDE）。
 
-Pipy 除了可以在系统边缘处理“南北向”的流量，还可以作为服务网格中的 sidecar 来处理“东西向”的流量。规则的灵活性，也是服务网格的必需。容器网络的隔离特性，使得网格中的规则调试更加困难，因为 Kubernetes 集群与服务网格可能隶属于不同的团队。此时，pipy dev console 的极大的方便了流量规则的调试。
+Pipy 除了可以在系统边缘处理 “南北向” 的流量，还可以作为服务网格中的 sidecar 来处理 “东西向” 的流量。规则的灵活性，也是服务网格的必需。容器网络的隔离特性，使得网格中的规则调试更加困难，因为 Kubernetes 集群与服务网格可能隶属于不同的团队。此时，Pipy dev console 的极大的方便了流量规则的调试。
 
-这里就为大家介绍一下 pipy console 的使用。
+这里就为大家介绍一下 Pipy dev console 的使用。
+
+## 安装 Pipy
+
+在介绍 Pipy dev console 之前需要先安装 Pipy，有以下集中方式。
+
+### 从源码编译
+
+编译前需要配置环境，安装如下依赖：
+
+* Clang 5.0+
+* CMake 3.0+
+* Node.js v12+ （只有在编译 dev console 时需要）
+* zlib
+
+依赖安装完之后执行 `./build.sh` 开始编译。
+
+编译完成后在 `bin` 目录中可以找到独立可执行文件。
+
+### 下载可执行文件
+
+从 [Pipy Release](https://github.com/flomesh-io/pipy/releases) 直接下载编译好的可执行文件。
+
+![](media/download-binary.png)
+
+### RPM 安装
+
+```shell
+$ yum -y install http://repo.flomesh.cn/pipy/pipy-latest.el7_pl.x86_64.rpm
+
+```
+
+### Docker 镜像
+
+```shell
+$ docker pull flomesh/pipy-pjs:latest
+$ docker run --rm --entrypoint 'pipy' flomesh/pipy-pjs:latest --help
+```
+
+也可以在 Kubernetes 上中运行：
+
+```shell
+$ cat > pod.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pipy
+  name: pipy
+spec:
+  containers:
+  - image: flomesh/pipy-pjs:latest
+    name: pipy
+    command: ["pipy", "--help"]
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+EOF
+
+$ kubectl apply -f pod.yaml
+$ kubectl logs pod
+```
 
 ## 启动 Pipy
 
-Pipy 编译之后的 `bin` 目录中只有一个 11 Mb 大小的独立可执行文件。如果不想编译，可以从 [这里](https://github.com/flomesh-io/pipy/releases) 下载二进制文件。
-
-[TODO: 这里可以罗列各种安装方式，比如rpm, docker, binary download]
-
-启动也很简单，只需要指定 javascript 脚本文件即可：`bin/pipy path_to_js_file`，或者 `bin/pipy http://host:port/script`。
+这里以可执行文件为例启动 Pipy。只需要指定 Javascript 脚本文件即可：`bin/pipy path_to_js_file`，或者 `bin/pipy http://host:port/script`。
 
 比如：
 

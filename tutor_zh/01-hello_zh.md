@@ -1,5 +1,7 @@
 # 0x01-基本输出
 
+简单的开始离不开 Hello world。Pipy 不只是个代理，我们可以用 Pipy 作为一个 Web 服务器，输出 Hello world。
+
 [`01-hello/hello.js`](https://github.com/flomesh-io/pipy/blob/main/tutorial/01-hello/hello.js)
 
 ```javascript
@@ -77,6 +79,11 @@ Pipy 的某些过滤器会在“独立”的上下文中执行（后面的教程
    └───────────────┘
 ```
 
+```shell
+$ curl localhost:8080 -d 'Hello world!'
+Hello world!
+```
+
 ### demuxHTTP 过滤器
 
 对请求进行解码，并发送到独立 session 的 pipeline 中，最终将 pipeline 返回的内容编码。
@@ -141,4 +148,8 @@ Hi, I'm on port 8081!
 $ curl localhost:8082
 Hi, I'm on port 8082!
 ```
+
+## 思考
+
+基本输出只是 Pipy 最基础的能力，说到代理就不得不说路由功能，从下一节开始我们就基于代理来一步步实现各种复杂的功能。
 
