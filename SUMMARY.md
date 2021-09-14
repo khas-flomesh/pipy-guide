@@ -1,8 +1,8 @@
 # Table of contents
 
-## 术语
+<!--## 术语
 
-* [术语表](glossary.md)
+* [术语表](glossary.md)-->
 
 ## 基础教程
 
